@@ -1,10 +1,14 @@
 // Now turn this trash into treasure!
 
 #include <Servo.h>
+#include <Keypad.h>
 
 // Constants
 const int led_pins[] = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 14 };
 int oldBtnVal = HIGH;
+
+const uint8_t ROWS = 4;
+const uint8_t COLS = 4;
 char keys[ROWS][COLS] = {
   { '1', '2', '3', 'A' },
   { '4', '5', '6', 'B' },
@@ -14,6 +18,8 @@ char keys[ROWS][COLS] = {
 
 uint8_t colPins[COLS] = { 26, 22, 21, 20 }; // Pins connected to C1, C2, C3, C4
 uint8_t rowPins[ROWS] = { 16, 17, 18, 19 }; // Pins connected to R1, R2, R3, R4
+
+Keypad keypad = keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 
 Servo servo;
 
@@ -72,5 +78,10 @@ void loop() {
   // Servo
   // servo.write(deg)
 
+  // Keypad
+  char key = keypad.getKey();
 
+  if (key != NO_KEY) {
+    Serial1.println(key);
+  }
 }
