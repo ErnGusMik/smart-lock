@@ -24,8 +24,8 @@
     {
       "type": "wokwi-membrane-keypad",
       "id": "wokwi-membrane-keypad-0",
-      "top": 631.6,
-      "left": -119.2,
+      "top": 583.6,
+      "left": -109.6,
       "attrs": {}
     }
   ],
@@ -55,7 +55,6 @@
     [ "wokwi-led-bar-graph-0:C10", "pico:GND.1", "black", [ "h9.82", "v-0.01", "h124.8" ] ],
     [ "wokwi-buzzer-0:1", "pico:GND.1", "black", [ "v124.8", "h105.6" ] ],
     [ "wokwi-pushbutton-0:2.l", "pico:GP15", "magenta", [ "v29", "h144", "v-57.64" ] ],
-    [ "wokwi-pushbutton-0:2.r", "pico:3V3", "magenta", [ "h192.2", "v-163" ] ],
     [ "wokwi-rgb-led-0:COM", "pico:3V3", "black", [ "v0" ] ],
     [ "wokwi-rgb-led-0:R", "pico:GP11", "yellow", [ "v0" ] ],
     [ "wokwi-rgb-led-0:G", "pico:GP12", "yellow", [ "v0" ] ],
