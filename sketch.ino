@@ -18,11 +18,39 @@ char keys[ROWS][COLS] = {
   { '*', '0', '#', 'D' }
 };
 
+
+
 int oldBtnVal = HIGH;
 
-
-
 Servo servo;
+
+char checkKeypad() {
+  int col = -1;
+  int row = -1;
+
+  for (int i = 0; i < COLS; i++) {
+    if (digitalRead(keypadCols[i]) == LOW) {
+      Serial1.println("smth pressed");
+      col = i;
+
+      for (int j = 0; j < ROWS; j++) {
+        digitalWrite(keypadRows[j], HIGH);
+
+        if (digitalRead(keypadCols[i]) == HIGH) {
+          Serial1.println("KEY FOUND!");
+          row = j;
+        }
+
+        digitalWrite(keypadRows[j], LOW);
+      }
+    }
+  }
+
+  Serial1.println(col);
+  Serial1.println(row);
+
+  return '1';
+}
 
 
 void setup() {
@@ -50,6 +78,14 @@ void setup() {
   // pinMode(11, OUTPUT);
   // pinMode(12, OUTPUT);
   // pinMode(13, OUTPUT);
+
+  for (int i = 0; i < ROWS; i++) {
+    pinMode(keypadRows[i], OUTPUT); // PULLUP?
+    digitalWrite(keypadRows[i], LOW);
+
+    pinMode(keypadCols[i], INPUT_PULLUP);
+    digitalWrite(keypadCols[i], HIGH);
+  }
 }
 
 
@@ -111,4 +147,6 @@ void loop() {
   }
 
   oldBtnVal = newBtnVal;
+
+  checkKeypad();
 }
