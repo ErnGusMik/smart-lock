@@ -4,7 +4,23 @@
 
 // Constants
 const int led_pins[] = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 14 };
+
+const uint8_t ROWS = 4;
+const uint8_t COLS = 4;
+
+const uint8_t keypadRows[ROWS] = { 20, 21, 22, 26 };
+const uint8_t keypadCols[COLS] = { 16, 17, 18, 19 };
+
+char keys[ROWS][COLS] = {
+  { '1', '2', '3', 'A' },
+  { '4', '5', '6', 'B' },
+  { '7', '8', '9', 'C' },
+  { '*', '0', '#', 'D' }
+};
+
 int oldBtnVal = HIGH;
+
+
 
 Servo servo;
 
@@ -27,8 +43,7 @@ void setup() {
   // pinMode(28, OUTPUT);
 
   // Servo
-  servo.attach(27);
-  delay(100);
+  // servo.attach(27);
   // servo.write(0);
 
   // // RGB light
@@ -63,35 +78,36 @@ void loop() {
   // servo.write(deg)
 
   if (newBtnVal != oldBtnVal && newBtnVal == LOW) {
-    // tone(28, 1000, 50);
-    servo.write(90);
+    tone(28, 1000, 50);
+    // servo.write(90);
     delay(100);
 
 
-    // digitalWrite(led_pins[0], HIGH);
-    // digitalWrite(led_pins[1], HIGH);
+    digitalWrite(led_pins[0], HIGH);
+    digitalWrite(led_pins[1], HIGH);
 
-    // for (int i = 0; i < 5; i++) {
-    //   for (int j = 2; j < 10 - i*2; j++) {
-    //    digitalWrite(led_pins[j], HIGH);
-    //   }
+    for (int i = 0; i < 5; i++) {
+      for (int j = 2; j < 10 - i*2; j++) {
+       digitalWrite(led_pins[j], HIGH);
+      }
 
-    //   analogWrite(11, 255);
-    //   delay(1000);
-    //   analogWrite(11, 0);
-    //   delay(500);
-    //   for (int j = 2; j < 10; j++) {
-    //    digitalWrite(led_pins[j], LOW);
-    //   }
-    // }
+      analogWrite(11, 255);
+      delay(1000);
+      analogWrite(11, 0);
+      delay(500);
+      for (int j = 2; j < 10; j++) {
+       digitalWrite(led_pins[j], LOW);
+      }
+    }
 
-    // digitalWrite(led_pins[0], LOW);
-    // digitalWrite(led_pins[1], LOW);
+    digitalWrite(led_pins[0], LOW);
+    digitalWrite(led_pins[1], LOW);
 
-    // // servo.write(0);
-    // tone(28, 500, 25);
-    // delay(100);
-    // tone(28, 500, 25);
+    // servo.write(0);
+    tone(28, 500, 25);
+    delay(100);
+    tone(28, 500, 25);
+    analogWrite(11, 0);
   }
 
   oldBtnVal = newBtnVal;
